@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="../css/grid.css" th:href="@{/css/grid.css}"></link>
+  <link rel="stylesheet" type="text/css" href="../css/main.css" th:href="@{/css/main.css}"></link>
+
+  <title th:text="#{entry.pageTitle}">Sprint Retrospective Items Aggregator</title>
+</head>
+
+<body>
+<div th:fragment="header">
+  <br />
+  <br />
+  <div class="row">
+    <div class="threecol"></div>
+    <div class="sixcol">
+      <h1 th:text="#{pages.headerTitle}">Sprint Retrospective Items Aggregator</h1>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="content">
+<div class="shadow">
+  <form method="POST" action="result.html" th:action="@{/items}">
+    <textarea name="items" rows="12" cols="72" autofocus="autofocus" placeholder="Please enter your retrospective items for the current sprint here"
+        th:attr="placeholder=#{entry.itemsPlaceHolder}"></textarea>
+    <div th:utext="#{entry.note}">
+      <p>
+        <strong>NOTE:</strong> <br />
+        ### every non-empty text line in the input is consider one retrospective item ###<br />
+        + Went well item starts with a plus sign<br />
+        - To be improved item starts with a minus sign<br />
+        * Suggestion item starts with an asterisk
+      </p>
+    </div>
+
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <div class="row">
+      <input class="threecol button green" type="submit" name="command" value="Submit"
+          th:attr="value=#{entry.button.submit}" />
+    </div>
+  </form>
+</div>
+</div>
+
+</body>
+
+</html>

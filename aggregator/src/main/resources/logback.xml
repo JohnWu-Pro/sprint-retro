@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="true" scan="true" scanPeriod="15 seconds">
+    <contextName>RETRO</contextName>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>%d{MM-dd HH:mm:ss.SSS} [%-5level] [%thread] %logger - %msg%n</pattern>
+        </encoder>
+
+        <file>logs/sprint-retro.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <! - - daily rollover - - >
+            <fileNamePattern>logs/sprint-retro.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <! - - or whenever the file size reaches 10MB - - >
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+
+            <! - - keep 30 days' worth of history - - >
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender> -->
+
+    <logger name="org.springframework" level="INFO" />
+<!--
+    <logger name="org.springframework.core.io.support.PathMatchingResourcePatternResolver" level="DEBUG" />
+    <logger name="org.springframework.webflow.definition.registry.FlowDefinitionRegistryImpl" level="DEBUG" />
+    <logger name="org.springframework.web.context.support.ServletContextResourcePatternResolver" level="DEBUG" />
+ -->
+    <logger name="org.wjh" level="DEBUG" />
+
+    <logger name="org.wjh.logging.MethodInvocationLogger" level="TRACE" />
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+        <!-- <appender-ref ref="FILE" /> -->
+    </root>
+
+</configuration>

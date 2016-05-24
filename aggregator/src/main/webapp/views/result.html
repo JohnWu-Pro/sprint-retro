@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="../css/grid.css" th:href="@{/css/grid.css}"></link>
+  <link rel="stylesheet" type="text/css" href="../css/main.css" th:href="@{/css/main.css}"></link>
+
+  <title th:text="#{result.pageTitle}">Sprint Retrospective - Submitted Items</title>
+</head>
+
+<body>
+<div th:include="entry::header">
+  <!--/*-->
+  <h1 class="center">Header Here</h1>
+  <!--*/-->
+</div>
+
+<div class="content">
+<div class="shadow">
+  <form method="GET" action="entry.html" th:action="@{/}">
+    <h2 th:utext="#{result.pagePrompt}">Aggregated retrospective items:</h2>
+    <br />
+    <br />
+
+    <div th:fragment="items" th:with="aggregation=${@retroService.getResult()}">
+
+    <div th:if="${not #lists.isEmpty(aggregation.wentWellItems)}">
+    <h3 th:utext="#{result.wentWellSectionTitle}">h2. Went Well</h3>
+    <br />
+    <div data-category="+" th:fragment="went-well-items" th:remove="all-but-first">
+      <div th:each="item : ${aggregation.wentWellItems}" th:text="${'* ' + item}">* Item one</div>
+      <div>* Item two</div>
+    </div>
+    <br />
+    </div>
+
+    <div th:if="${not #lists.isEmpty(aggregation.toBeImprovedItems)}">
+    <h3 th:utext="#{result.toBeImprovedSectionTitle}">h2. To Be Improved</h3>
+    <br />
+    <div data-category="-" th:fragment="to-be-improved-items" th:remove="all-but-first">
+      <div th:each="item : ${aggregation.toBeImprovedItems}" th:text="${'* ' + item}">* Item one</div>
+      <div>* Item two</div>
+    </div>
+    <br />
+    </div>
+
+    <div th:if="${not #lists.isEmpty(aggregation.suggestionItems)}">
+    <h3 th:utext="#{result.suggestionItemsSectionTitle}">h2. Suggestions</h3>
+    <br />
+    <div data-category="*" th:fragment="suggestion-items" th:remove="all-but-first">
+      <div th:each="item : ${aggregation.suggestionItems}" th:text="${'* ' + item}">* Item one</div>
+      <div>* Item two</div>
+    </div>
+    <br />
+    </div>
+
+    <div th:if="${not #lists.isEmpty(aggregation.uncategorizableItems)}">
+    <h3 th:utext="#{result.uncategorizableSectionTitle}">h2. Uncategorizable Items</h3>
+    <br />
+    <div data-category="?" th:fragment="uncategorizable-items" th:remove="all-but-first">
+      <div th:each="item : ${aggregation.uncategorizableItems}" th:text="${'* ' + item}">* Item one</div>
+      <div>* Item two</div>
+    </div>
+    <br />
+    </div>
+
+    </div>
+
+    <div class="spacer"></div>
+    <div class="row">
+      <input class="threecol button green" type="submit" name="command" value="More Items"
+          th:value="#{result.button.more}" />
+    </div>
+  </form>
+</div>
+</div>
+
+</body>
+
+</html>
